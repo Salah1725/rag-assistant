@@ -1,0 +1,132 @@
+[
+  {
+    "question": "Quelle société savante française rassemble les praticiens, chercheurs et doctorants de la recherche opérationnelle et de l'aide à la décision ?",
+    "source": "cours1.pdf",
+    "page": 3
+  },
+  {
+    "question": "À quelle occasion historique l'expression « recherche opérationnelle » est-elle apparue, et pour résoudre quel type de problèmes ?",
+    "source": "cours1.pdf",
+    "page": 5
+  },
+  {
+    "question": "Sur quelles disciplines mathématiques repose la recherche opérationnelle, et quels chercheurs leur sont associés ?",
+    "source": "cours1.pdf",
+    "page": 7
+  },
+  {
+    "question": "Quelle différence y a-t-il entre un problème en nombres entiers mixte et un programme linéaire entièrement en nombres entiers ?",
+    "source": "cours1.pdf",
+    "page": 23
+  },
+  {
+    "question": "Combien de solutions possibles un programme 0-1 à n variables admet-il, et pourquoi tout énumérer devient-il impossible pour n = 50 ?",
+    "source": "cours1.pdf",
+    "page": 27
+  },
+  {
+    "question": "Comment définit-on la classe NP à partir de la possibilité de convaincre quelqu'un qu'une réponse est vraie ?",
+    "source": "cours1.pdf",
+    "page": 30
+  },
+  {
+    "question": "Qu'est-ce qu'un problème de décision ?",
+    "source": "cours1.pdf",
+    "page": 28
+  },
+  {
+    "question": "Pour l'entreprise de voiles, quels sont les coûts de production normale, d'heures supplémentaires et de stockage par voile ?",
+    "source": "cours1.pdf",
+    "page": 18
+  },
+  {
+    "question": "Comment formule-t-on le problème du voyageur de commerce ?",
+    "source": "cours1.pdf",
+    "page": 20
+  },
+  {
+    "question": "Dans le jeu de Piquet à cheval, avec combien de jetons commence-t-on et combien peut-on en prendre à chaque tour ?",
+    "source": "cours1.pdf",
+    "page": 15
+  },
+  {
+    "question": "Quelle différence y a-t-il entre un modèle paramétrique et un modèle non paramétrique, et comment évolue leur complexité ?",
+    "source": "chap2.pdf",
+    "page": 12
+  },
+  {
+    "question": "Quelle fonction de perte pour la régression combine un comportement linéaire et un comportement quadratique ?",
+    "source": "chap2.pdf",
+    "page": 20
+  },
+  {
+    "question": "Pourquoi dit-on que la minimisation du risque empirique est un problème mal posé, au sens de Hadamard ?",
+    "source": "chap2.pdf",
+    "page": 25
+  },
+  {
+    "question": "Pour prédire la position de quel objet céleste la méthode des moindres carrés a-t-elle été utilisée historiquement ?",
+    "source": "chap2.pdf",
+    "page": 37
+  },
+  {
+    "question": "Pourquoi ne peut-on pas modéliser directement la probabilité de la classe 1 par une fonction linéaire, et quelle transformation utilise-t-on ?",
+    "source": "chap2.pdf",
+    "page": 48
+  },
+  {
+    "question": "Existe-t-il une solution analytique pour la régression logistique, et comment l'entraîne-t-on ?",
+    "source": "chap2.pdf",
+    "page": 54
+  },
+  {
+    "question": "Quels problèmes causent des variables explicatives corrélées dans une régression linéaire ?",
+    "source": "chap2.pdf",
+    "page": 43
+  },
+  {
+    "question": "Pourquoi utiliser un SGBD plutôt que manipuler directement des fichiers de données ?",
+    "source": "CM1DB.pdf",
+    "page": 7
+  },
+  {
+    "question": "Quelles sont les trois règles du système d'inférence d'Armstrong pour les dépendances fonctionnelles ?",
+    "source": "CM1DB.pdf",
+    "page": 28
+  },
+  {
+    "question": "Pourquoi une relation où une même case contient plusieurs auteurs n'est-elle pas en première forme normale ?",
+    "source": "CM1DB.pdf",
+    "page": 45
+  },
+  {
+    "question": "À quelles conditions une relation est-elle en deuxième forme normale ?",
+    "source": "CM1DB.pdf",
+    "page": 46
+  },
+  {
+    "question": "Pourquoi la troisième forme normale peut-elle rester insuffisante, par exemple avec les dépendances entre rue, ville et code postal ?",
+    "source": "CM1DB.pdf",
+    "page": 55
+  },
+  {
+    "question": "Qu'est-ce qu'une anomalie d'insertion, avec un exemple sur les cours ?",
+    "source": "CM1DB.pdf",
+    "page": 20
+  },
+  {
+    "question": "Qu'est-ce qu'une entité faible et quels sont ses inconvénients ?",
+    "source": "CM1DB.pdf",
+    "page": 66
+  },
+  {
+    "question": "Quelles sont les trois familles d'opérations du langage SQL ?",
+    "source": "CM1DB.pdf",
+    "page": 76
+  },
+  {
+    "question": "Que signifie une cardinalité minimale de 0 par rapport à une cardinalité supérieure à 0 dans une association ?",
+    "source": "CM1DB.pdf",
+    "page": 63
+  }
+]
