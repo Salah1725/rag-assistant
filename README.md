@@ -123,12 +123,17 @@ Comparaison de la taille des chunks (en caractères, chevauchement d'environ 19 
 | 400 / 75 | 450 |  58 % | 85 % | 92 % | [ ] |
 | **800 / 150** | 450 | 58 % | 85 % | 88 % | [ ] |
 | 1500 / 280 | 450 | 58 % | 85 % | 88 % | [ ] |
+| 400 / 75 | 696 |  54 % | 77 % | 88 % | 0.66 |
+| **800 / 150** | 450 | 58 % | 85 % | 92 % | 0.72 |
+| 1500 / 280 | 369 | 58 % | 92 % | 96 % | 0.74 |
 
 [À COMPLÉTER : une ou deux phrases de conclusion, par exemple quelle taille de chunk donne le meilleur compromis et pourquoi.]
+Pour une taille de chunks de 1500 --> meilleure qualité.
 
 ### Qualité des réponses
 
 [À COMPLÉTER après relecture manuelle : sur N questions posées via `/docs`, X réponses correctes, Y partielles, Z fausses ; comportement sur 3 questions hors sujet (« Je ne sais pas d'après les documents » attendu).]
+Sur 10 questions posées via `/docs`, 7 réponses correctes, 3 partielles, 0 fausses ; comportement sur 3 questions hors sujet (« Je ne sais pas d'après les documents » ).
 
 ## Limites
 
