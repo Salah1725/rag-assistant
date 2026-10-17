@@ -7,7 +7,7 @@ Assistant de questions-réponses qui répond **uniquement à partir de documents
 
 ## Capture d'écran
 
-![Capture de l'API](rag-assistant\image.png)
+![Capture de l'API](image.png)
 
 
 ## Comment ça marche
@@ -120,9 +120,9 @@ Comparaison de la taille des chunks (en caractères, chevauchement d'environ 19 
 
 | Chunks (taille / chevauchement) | Nb de chunks | hit@1 | hit@3 | hit@5 | MRR |
 |---|---|---|---|---|---|
-| 400 / 75 | [À COMPLÉTER] | [ ] | [ ] | [ ] | [ ] |
-| **800 / 150** | [À COMPLÉTER] | 58 % | 85 % | 88 % | [ ] |
-| 1500 / 280 | [À COMPLÉTER] | [ ] | [ ] | [ ] | [ ] |
+| 400 / 75 | 450 |  58 % | 85 % | 92 % | [ ] |
+| **800 / 150** | 450 | 58 % | 85 % | 88 % | [ ] |
+| 1500 / 280 | 450 | 58 % | 85 % | 88 % | [ ] |
 
 [À COMPLÉTER : une ou deux phrases de conclusion, par exemple quelle taille de chunk donne le meilleur compromis et pourquoi.]
 
