@@ -1,71 +1,71 @@
 """Évaluation du retrieval : hit rate@k et MRR sur eval_questions.json.
 
+Compare toutes les méthodes de recherche (dense / bm25 / hybrid, avec ou sans reranker)
+sur l'index actuel (celui créé par ingest.py).
+
 Usage :
-    python eval.py              -> affiche les résultats
-    python eval.py 800/150      -> affiche + ajoute une ligne dans results.csv
-                                   (pour comparer les tailles de chunks)
+    python eval.py                    -> tableau de comparaison
+    python eval.py --misses           -> affiche aussi les questions ratées
+    python eval.py --save 800/150     -> ajoute les lignes dans results.csv
 """
+import argparse
 import csv
 import json
-import sys
-from collections import defaultdict
 from pathlib import Path
 
 from rag import col, retrieve
 
 KS = (1, 3, 5)
-MAX_K = max(KS)
+CONFIGS = [(mode, rr) for rr in (False, True) for mode in ("dense", "bm25", "hybrid")]
 
-with open("eval_questions.json", encoding="utf-8") as f:
-    data = json.load(f)
 
-# Pour chaque question : rang de la bonne page dans les résultats (None = absente)
-ranks = []
-for item in data:
-    results = retrieve(item["question"], MAX_K)
-    rank = next(
-        (i + 1 for i, r in enumerate(results)
-         if r["source"] == item["source"] and r["page"] == item["page"]),
-        None,
-    )
-    ranks.append(rank)
-    if rank is None:
-        print("RATÉ :", item["question"])
-        print("   attendu :", item["source"], "p.", item["page"])
-        print("   trouvé  :", [(r["source"], r["page"]) for r in results])
+def evaluate(data, mode, use_rerank, show_misses=False):
+    """Rang de la bonne page pour chaque question (None = absente du top 5)."""
+    ranks = []
+    for item in data:
+        results = retrieve(item["question"], max(KS), mode, use_rerank)
+        rank = next((i + 1 for i, r in enumerate(results)
+                     if r["source"] == item["source"] and r["page"] == item["page"]), None)
+        ranks.append(rank)
+        if rank is None and show_misses:
+            print(f"  RATÉ ({mode}, rerank={use_rerank}) : {item['question']}")
+            print(f"     attendu : {item['source']} p.{item['page']}"
+                  f" | trouvé : {[(r['source'], r['page']) for r in results]}")
+    n = len(ranks)
+    scores = {f"hit@{k}": sum(r is not None and r <= k for r in ranks) / n for k in KS}
+    scores["mrr"] = sum(1 / r for r in ranks if r is not None) / n
+    return scores
 
-n = len(data)
-n_chunks = col.count()
 
-print(f"\n--- Résultats sur {n} questions ({n_chunks} chunks indexés) ---")
-rates = {}
-for k in KS:
-    hits = sum(1 for r in ranks if r is not None and r <= k)
-    rates[k] = hits / n
-    print(f"hit rate@{k} = {hits}/{n} = {rates[k]:.0%}")
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--save", metavar="CHUNKING", help="ex. 800/150 : ajoute les résultats à results.csv")
+    parser.add_argument("--misses", action="store_true", help="affiche les questions ratées")
+    args = parser.parse_args()
 
-mrr = sum(1 / r for r in ranks if r is not None) / n
-print(f"MRR = {mrr:.2f}")
+    with open("eval_questions.json", encoding="utf-8") as f:
+        data = json.load(f)
 
-# Détail par cours
-by_file = defaultdict(list)
-for item, r in zip(data, ranks):
-    by_file[item["source"]].append(r)
+    print(f"{len(data)} questions, {col.count()} chunks indexés\n")
+    print(f"{'recherche':<18}{'hit@1':>7}{'hit@3':>7}{'hit@5':>7}{'MRR':>7}")
+    rows = []
+    for mode, rr in CONFIGS:
+        s = evaluate(data, mode, rr, args.misses)
+        name = mode + (" + rerank" if rr else "")
+        print(f"{name:<18}{s['hit@1']:>7.0%}{s['hit@3']:>7.0%}{s['hit@5']:>7.0%}{s['mrr']:>7.2f}")
+        rows.append([args.save, name, col.count(), f"{s['hit@1']:.0%}", f"{s['hit@3']:.0%}",
+                     f"{s['hit@5']:.0%}", f"{s['mrr']:.2f}"])
 
-print(f"\n--- Par cours (bonne page dans le top {MAX_K}) ---")
-for name, rs in by_file.items():
-    ok = sum(1 for r in rs if r is not None)
-    print(f"{name} : {ok}/{len(rs)}")
+    if args.save:
+        out = Path("results.csv")
+        is_new = not out.exists()
+        with open(out, "a", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            if is_new:
+                w.writerow(["chunking", "retrieval", "chunks", "hit@1", "hit@3", "hit@5", "mrr"])
+            w.writerows(rows)
+        print(f"\nRésultats ajoutés à {out}")
 
-# Optionnel : enregistrer une ligne pour le tableau du README
-if len(sys.argv) > 1:
-    label = sys.argv[1]
-    out = Path("results.csv")
-    is_new = not out.exists()
-    with open(out, "a", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        if is_new:
-            w.writerow(["config", "chunks", "hit@1", "hit@3", "hit@5", "mrr"])
-        w.writerow([label, n_chunks, f"{rates[1]:.0%}", f"{rates[3]:.0%}",
-                    f"{rates[5]:.0%}", f"{mrr:.2f}"])
-    print(f"\nLigne ajoutée à {out} (config : {label})")
+
+if __name__ == "__main__":
+    main()
