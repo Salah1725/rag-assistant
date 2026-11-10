@@ -107,7 +107,7 @@ Si Ollama n'est pas lancé ou si le modèle n'est pas téléchargé, `/ask` renv
 L'évaluation mesure la **qualité de la recherche** (sans LLM) : pour chaque question du jeu de test, la bonne page est-elle parmi les k passages renvoyés ?
 
 - **Jeu de test** : 26 questions (10 sur la recherche opérationnelle, 7 sur les régressions, 9 sur les bases de données), chacune associée au fichier et à la page contenant la réponse. Les questions sont rédigées en français, y compris sur les cours en anglais.
-- **Construction** : les questions ont été rédigées à partir du texte des cours avec l'aide d'un assistant IA, puis chaque page attendue a été contrôlée par recherche de mots-clés. [À COMPLÉTER : « J'ai en plus vérifié N questions à la main dans les PDF. »]
+- **Construction** : les questions ont été rédigées à partir du texte des cours avec l'aide d'un assistant IA, puis chaque page attendue a été contrôlée par recherche de mots-clés. 
 - **Métriques** : *hit rate@k* (part des questions dont la bonne page est dans les k premiers résultats) et *MRR* (récompense les bonnes pages bien classées).
 
 ```powershell
